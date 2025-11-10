@@ -1,4 +1,6 @@
 using hombresYMujeresFacturan.Components;
+using hombresYMujeresFacturan.Components.Data;
+using hombresYMujeresFacturan.Components.Servicios;
 using Microsoft.Data.Sqlite;
 
 var builder = WebApplication.CreateBuilder(args);

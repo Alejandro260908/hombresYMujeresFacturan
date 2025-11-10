@@ -10,6 +10,12 @@ namespace hombresYMujeresFacturan.Components.Servicios
         {
             _servicioFactura = servicioFactura;
         }
+
+        public async Task<List<factura>> ObtenerFacturas()
+        {
+            return await _servicioFactura.ObtenerFacturas();
+        }   
+    
         public async Task AgregarFactura(factura nuevaFactura)
         {
             nuevaFactura.identificador = await GenerarNuevoId();
@@ -18,13 +24,10 @@ namespace hombresYMujeresFacturan.Components.Servicios
 
         public async Task<int> GenerarNuevoId()
         {
-            var juego = await _servicioFactura.ObtenerFacturas();
-            return juego.Any() ? juego.Max(t => t.identificador) + 1 : 1;
+            var factura = await _servicioFactura.ObtenerFacturas();
+            return factura.Any() ? factura.Max(t => t.identificador) + 1 : 1;
         }
 
-        public async Task<List<factura>> ObtenerFacturas()
-        {
-            return await _servicioFactura.ObtenerFacturas();
-        }   
-    }
+
+    } 
 }
