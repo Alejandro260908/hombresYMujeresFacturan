@@ -28,6 +28,10 @@ namespace hombresYMujeresFacturan.Components.Servicios
             return factura.Any() ? factura.Max(t => t.identificador) + 1 : 1;
         }
 
+        public async Task EliminarFactura(int identificador, int t)
+        {
+            await _servicioFactura.EliminarFactura(identificador, t);
+        }
 
     } 
 }
