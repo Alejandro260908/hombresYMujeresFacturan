@@ -6,9 +6,9 @@ namespace hombresYMujeresFacturan.Components.Servicios
     {
         private readonly ServicioFactura _servicioFactura;
 
-        public ServicioControlador()
+        public ServicioControlador(ServicioFactura servicioFactura)
         {
-            _servicioFactura = new ServicioFactura();
+            _servicioFactura = servicioFactura;
         }
         public async Task AgregarFactura(factura nuevaFactura)
         {
