@@ -49,5 +49,28 @@ namespace hombresYMujeresFacturan.Components.Data
             return facturas;
         }
 
+        public async Task EliminarFactura (int identificador, int t)
+        {
+            string ruta = "mibase.db";
+            using var conexion = new SqliteConnection($"DataSource={ruta}");
+            await conexion.OpenAsync();
+
+            var comando = conexion.CreateCommand();
+            comando.CommandText = "DELETE FROM facturas WHERE IDENTIFICADOR = $identificador";
+            comando.Parameters.AddWithValue("$identificador", identificador);
+
+            comando.ExecuteNonQueryAsync();
+
+            var comando1 = conexion.CreateCommand();
+            for (int i = identificador; i <= t; i++)
+            {
+                comando1.CommandText = "UPDATE facturas SET IDENTIFICADOR = $newId WHERE IDENTIFICADOR = $oldId";
+                comando1.Parameters.AddWithValue("$newId", i - 1);
+                comando1.Parameters.AddWithValue("$oldId", i);
+                comando1.ExecuteNonQueryAsync();
+                comando1.Parameters.Clear();
+            }
+        }
+
     }
 }
