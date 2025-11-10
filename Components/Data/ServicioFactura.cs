@@ -72,7 +72,7 @@ namespace hombresYMujeresFacturan.Components.Data
             }
         }
 
-        public async Task ActualizarFactura(int identificador,string fecha, string nombrecliente, string articulos, int total)
+        public async Task ActualizarFactura(int identificador,string fecha, string nombrecliente, string articulos, decimal total)
         {
             string ruta = "mibase.db";
             using var conexion = new SqliteConnection($"DataSource={ruta}");

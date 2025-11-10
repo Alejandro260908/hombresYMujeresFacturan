@@ -64,6 +64,17 @@
         Console.WriteLine($"Factura eliminada con identificador: {newFactura.identificador}");
     }
 
+    private async Task ActualizarFactura()
+    {
+        if (newFactura.identificador != null)
+        {
+            await ServicioControlador.ActualizarFactura(newFactura.identificador, newFactura.fecha, newFactura.cliente, newFactura.articulos, newFactura.total);
+            facturas = await ServicioControlador.ObtenerFacturas();
+            newFactura = new factura();
+        }
+
+    }
+
     protected override async Task OnInitializedAsync()
     {
         facturas = await ServicioControlador.ObtenerFacturas();

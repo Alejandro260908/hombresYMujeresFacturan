@@ -33,7 +33,7 @@ namespace hombresYMujeresFacturan.Components.Servicios
             await _servicioFactura.EliminarFactura(identificador, t);
         }
 
-        public async Task ActualizarFactura(int identificador, string fecha, string nombrecliente, string articulos, int total)
+        public async Task ActualizarFactura(int identificador, string fecha, string nombrecliente, string articulos, decimal total)
         {
             await _servicioFactura.ActualizarFactura(identificador, fecha, nombrecliente, articulos, total);
         }
