@@ -12,7 +12,7 @@ namespace hombresYMujeresFacturan.Components.Data
             await conexion.OpenAsync();
 
             var comando = conexion.CreateCommand();
-            comando.CommandText = "insert into juegos (identificador,nombre,jugado) values ($IDENTIFICADOR,$NOMBRE,$JUGADO)";
+            comando.CommandText = "insert into facturas (identificador,fecha,nombrecliente,articulos,total) values ($IDENTIFICADOR,$FECHA,$NOMBRECLIENTE,$ARTICULOS,$TOTAL)";
             comando.Parameters.AddWithValue("$IDENTIFICADOR", nuevaFactura.identificador);
             comando.Parameters.AddWithValue("$FECHA", nuevaFactura.fecha);
             comando.Parameters.AddWithValue("$NOMBRECLIENTE", nuevaFactura.cliente);
@@ -31,7 +31,7 @@ namespace hombresYMujeresFacturan.Components.Data
             await conexion.OpenAsync();
 
             var comando = conexion.CreateCommand();
-            comando.CommandText = "SELECT IDENTIFICADOR,FECHA,NOMBRECLIENTE,ARTICULOS,TOTAL FROM FACTURAS";
+            comando.CommandText = "SELECT IDENTIFICADOR,FECHA,NOMBRECLIENTE,ARTICULOS,TOTAL FROM facturas";
             using var lector = await comando.ExecuteReaderAsync();
 
             while (await lector.ReadAsync())
@@ -70,6 +70,23 @@ namespace hombresYMujeresFacturan.Components.Data
                 comando1.ExecuteNonQueryAsync();
                 comando1.Parameters.Clear();
             }
+        }
+
+        public async Task ActualizarFactura(int identificador,string fecha, string nombrecliente, string articulos, int total)
+        {
+            string ruta = "mibase.db";
+            using var conexion = new SqliteConnection($"DataSource={ruta}");
+            await conexion.OpenAsync();
+
+            var comando = conexion.CreateCommand();
+            comando.CommandText = "UPDATE facturas SET FECHA = @fecha ,NOMBRECLIENTE = @nombrecliente, ARTICULOS = @articulos, TOTAL = @total WHERE IDENTIFICADOR =@identificador";
+            comando.Parameters.AddWithValue("@identificador", identificador);
+            comando.Parameters.AddWithValue("@fecha", fecha);
+            comando.Parameters.AddWithValue("@nombrecliente", nombrecliente);
+            comando.Parameters.AddWithValue("@articulos", articulos);
+            comando.Parameters.AddWithValue("@total", total);
+
+            comando.ExecuteNonQueryAsync();
         }
 
     }
