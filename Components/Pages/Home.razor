@@ -26,9 +26,16 @@
     </ul>
 </div>
 
+<div>
+    <p>Para eliminar una factura introduzca el identificador y presione el boton de abajo: </p>
+    <input type="int" placeholder="Identificador de la factura" @bind="newFactura.identificador" class="form-control mb-2" />
+    
+</div>
+
 @code{
     private List<factura> facturas = new List<factura>();
     private factura newFactura = new();
+    private int t;
 
 
     private async Task crearFactura()
@@ -43,6 +50,18 @@
         }
 
         Console.WriteLine($"Factura creada para {newFactura.cliente} en la fecha {newFactura.fecha} con los artículos: {newFactura.articulos}");
+    }
+
+    private async Task eliminarFactura()
+    {
+        // Lógica para eliminar la factura
+        if (newFactura.identificador != null)
+    {
+            await ServicioControlador.EliminarFactura(newFactura.identificador, t =facturas.Count);
+            facturas = await ServicioControlador.ObtenerFacturas();
+            newFactura = new factura();
+        }
+        Console.WriteLine($"Factura eliminada con identificador: {newFactura.identificador}");
     }
 
     protected override async Task OnInitializedAsync()
