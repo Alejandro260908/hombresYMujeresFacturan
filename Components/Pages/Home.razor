@@ -44,4 +44,10 @@
 
         Console.WriteLine($"Factura creada para {newFactura.cliente} en la fecha {newFactura.fecha} con los artículos: {newFactura.articulos}");
     }
+
+    protected override async Task OnInitializedAsync()
+    {
+        facturas = await ServicioControlador.ObtenerFacturas();
+
+    }
 }
