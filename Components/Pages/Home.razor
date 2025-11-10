@@ -1,4 +1,7 @@
 ﻿@page "/"
+@using hombresYMujeresFacturan.Components.Data
+@rendermode InteractiveServer
+@inject Servicios.ServicioControlador ServicioControlador
 
 <PageTitle>Home</PageTitle>
 
@@ -6,19 +9,39 @@
 
 <div>
     <p>Para crear una factura, haga clic en el botón de abajo:</p>
-    <input type="text" placeholder="Fecha de facturacion" @bind="facturaFecha" class="form-control mb-2" />
-    <input type="text" placeholder="Nombre del cliente" @bind="clienteNombre" class="form-control mb-2" />
-    <input type="text" placeholder="Articulos" @bind="articulos" class="form-control mb-2" />
+    <input type="text" placeholder="Fecha de facturacion" @bind="newFactura.fecha" class="form-control mb-2" />
+    <input type="text" placeholder="Nombre del cliente" @bind="newFactura.cliente" class="form-control mb-2" />
+    <input type="text" placeholder="Articulos" @bind="newFactura.articulos" class="form-control mb-2" />
     <button class="btn btn-primary" @onclick="crearFactura">Crear Factura</button>
 </div>
 
+<div>
+    <h3>Facturas:</h3>
+    <ul>
+        @foreach(var f in facturas)
+        {
+            <li>@f.identificador - @f.cliente - @f.fecha - @f.articulos - @f.total</li>
+        }
+)
+    </ul>
+</div>
+
 @code{
-    private string facturaFecha = string.Empty;
-    private string clienteNombre = string.Empty;
-    private string articulos = string.Empty;
-    private void crearFactura()
+    private List<factura> facturas = new List<factura>();
+    private factura newFactura = new();
+
+
+    private async Task crearFactura()
     {
         // Lógica para crear la factura
-        Console.WriteLine($"Factura creada para {clienteNombre} en la fecha {facturaFecha} con los artículos: {articulos}");
+
+        if (!string.IsNullOrWhiteSpace(newFactura.cliente))
+        {
+            await ServicioControlador.AgregarFactura(newFactura);
+            facturas = await ServicioControlador.ObtenerFacturas();
+            newFactura = new factura();
+        }
+
+        Console.WriteLine($"Factura creada para {newFactura.cliente} en la fecha {facturaFecha} con los artículos: {articulos}");
     }
 }
