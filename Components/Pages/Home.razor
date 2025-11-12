@@ -9,7 +9,7 @@
 
 <div>
     <p>Para crear una factura, haga clic en el botón de abajo:</p>
-    <input type="date" placeholder="Fecha de facturacion" @bind="newFactura.fecha" class="form-control mb-2" />
+    <input type="text" placeholder="Fecha(dd/mm/yyyy)" @bind="newFactura.fecha" class="form-control mb-2" />
     <input type="text" placeholder="Nombre del cliente" @bind="newFactura.cliente" class="form-control mb-2" />
     <input type="text" placeholder="Articulos" @bind="newFactura.articulos" class="form-control mb-2" />
     <button class="btn btn-primary" @onclick="crearFactura">Crear Factura</button>
