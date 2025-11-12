@@ -14,7 +14,7 @@ namespace hombresYMujeresFacturan.Components.Data
             var comando = conexion.CreateCommand();
             comando.CommandText = "insert into facturas (identificador,fecha,nombrecliente,articulos,total) values ($IDENTIFICADOR,$FECHA,$NOMBRECLIENTE,$ARTICULOS,$TOTAL)";
             comando.Parameters.AddWithValue("$IDENTIFICADOR", nuevaFactura.identificador);
-            comando.Parameters.AddWithValue("$FECHA", nuevaFactura.fecha);
+            comando.Parameters.AddWithValue("$FECHA", nuevaFactura.fecha.ToLongDateString);
             comando.Parameters.AddWithValue("$NOMBRECLIENTE", nuevaFactura.cliente);
             comando.Parameters.AddWithValue("$ARTICULOS", nuevaFactura.articulos);
             comando.Parameters.AddWithValue("$TOTAL", nuevaFactura.total);

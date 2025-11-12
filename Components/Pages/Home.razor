@@ -9,7 +9,7 @@
 
 <div>
     <p>Para crear una factura, haga clic en el botón de abajo:</p>
-    <input type="text" placeholder="Fecha de facturacion" @bind="newFactura.fecha" class="form-control mb-2" />
+    <input type="date" placeholder="Fecha de facturacion" @bind="newFactura.fecha" class="form-control mb-2" />
     <input type="text" placeholder="Nombre del cliente" @bind="newFactura.cliente" class="form-control mb-2" />
     <input type="text" placeholder="Articulos" @bind="newFactura.articulos" class="form-control mb-2" />
     <button class="btn btn-primary" @onclick="crearFactura">Crear Factura</button>
@@ -30,6 +30,15 @@
     <p>Para eliminar una factura introduzca el identificador y presione el boton de abajo: </p>
     <input type="int" placeholder="Identificador de la factura" @bind="newFactura.identificador" class="form-control mb-2" />
     
+</div>
+
+<div>
+    <p>Para actualizar una factura, haga clic en el botón de abajo:</p>
+    <input type="int" placeholder="Identificador de la factura" @bind="newFactura.identificador" class="form-control mb-2" />
+    <input type="text" placeholder="Fecha de facturacion" @bind="newFactura.fecha" class="form-control mb-2" />
+    <input type="text" placeholder="Nombre del cliente" @bind="newFactura.cliente" class="form-control mb-2" />
+    <input type="text" placeholder="Articulos" @bind="newFactura.articulos" class="form-control mb-2" />
+    <button class="btn btn-primary" @onclick="ActualizarFactura">Actualizar Factura</button>
 </div>
 
 @code{
