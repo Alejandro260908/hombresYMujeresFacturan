@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
+using System.Data;
 
 namespace hombresYMujeresFacturan.Components.Data
 {
@@ -14,7 +15,7 @@ namespace hombresYMujeresFacturan.Components.Data
             var comando = conexion.CreateCommand();
             comando.CommandText = "insert into facturas (identificador,fecha,nombrecliente,articulos,total) values ($IDENTIFICADOR,$FECHA,$NOMBRECLIENTE,$ARTICULOS,$TOTAL)";
             comando.Parameters.AddWithValue("$IDENTIFICADOR", nuevaFactura.identificador);
-            comando.Parameters.AddWithValue("$FECHA", nuevaFactura.fecha.ToLongDateString);
+            comando.Parameters.AddWithValue("$FECHA", nuevaFactura.fecha);
             comando.Parameters.AddWithValue("$NOMBRECLIENTE", nuevaFactura.cliente);
             comando.Parameters.AddWithValue("$ARTICULOS", nuevaFactura.articulos);
             comando.Parameters.AddWithValue("$TOTAL", nuevaFactura.total);
@@ -31,7 +32,7 @@ namespace hombresYMujeresFacturan.Components.Data
             await conexion.OpenAsync();
 
             var comando = conexion.CreateCommand();
-            comando.CommandText = "SELECT IDENTIFICADOR,FECHA,NOMBRECLIENTE,ARTICULOS,TOTAL FROM facturas";
+            comando.CommandText = "SELECT IDENTIFICADOR,DATE(FECHA),NOMBRECLIENTE,ARTICULOS,TOTAL FROM facturas";
             using var lector = await comando.ExecuteReaderAsync();
 
             while (await lector.ReadAsync())
