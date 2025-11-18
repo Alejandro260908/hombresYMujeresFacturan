@@ -42,4 +42,10 @@ facturas ( identificador integer, fecha text, nombreCliente text, articulos text
 ";
 comando.ExecuteNonQuery();
 
+comando.CommandText = @"
+create table if not exists
+productos ( identificador integer, nombre text, precio integer)
+";
+comando.ExecuteNonQuery();
+
 app.Run();
