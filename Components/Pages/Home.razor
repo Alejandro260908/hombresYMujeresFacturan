@@ -3,7 +3,13 @@
 @rendermode InteractiveServer
 @inject Servicios.ServicioControlador ServicioControlador
 
+<head>
+    <title>Home - hombresYMujeresFacturan</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/main.css" />
 <PageTitle>Home</PageTitle>
+</head>
 
 <body>
 <h1>Crear una factura</h1>
@@ -41,7 +47,7 @@
     <input type="text" placeholder="Articulos" @bind="newFactura.articulos" class="form-control mb-2" />
     <button class="btn btn-primary" @onclick="ActualizarFactura">Actualizar Factura</button>
 </div>
-
+</body>
 @code{
     private List<factura> facturas = new List<factura>();
     private factura newFactura = new();
